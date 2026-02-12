@@ -1,0 +1,212 @@
+/*
+========================================
+Reusable list and item styles
+========================================
+*/
+
+.debug-section-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.debug-section-item {
+    background: rgba(0, 0, 0, 0.25);
+    border-radius: 4px;
+    padding: 6px 8px;
+    border-left: 2px solid rgba(255, 255, 255, 0.2);
+    transition: background-color 0.2s ease;
+}
+
+.debug-section-item:hover {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.debug-section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+.debug-section-title {
+    display: flex;
+    align-items: center;
+}
+
+.debug-section-name {
+    font-weight: 600;
+    font-size: 13px;
+    color: #fff;
+}
+
+.debug-section-type {
+    font-size: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 1px 4px;
+    border-radius: 3px;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.debug-section-details {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin-top: 6px;
+    padding-top: 6px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.debug-detail-row {
+    display: flex;
+    font-size: 11px;
+    gap: 6px;
+    padding-right: 20px;
+    position: relative;
+}
+
+.debug-detail-label {
+    color: rgba(255, 255, 255, 0.5);
+    min-width: 35px;
+}
+
+.debug-detail-values {
+    color: #e0e0e0;
+    font-family: monospace;
+}
+
+/* CoordDisplayer styles */
+.coord-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    padding: 2px 0;
+}
+
+.coord-label {
+    color: rgba(255, 255, 255, 0.5);
+    min-width: 35px;
+    flex-shrink: 0;
+}
+
+.coord-boxes {
+    display: flex;
+    gap: 3px;
+    flex: 1;
+    min-width: 0;
+}
+
+.coord-box {
+    width: 0;
+    flex: 1;
+    border: 1px solid transparent;
+    border-radius: 3px;
+    color: #e0e0e0;
+    font-family: monospace;
+    font-size: 10px;
+    padding: 3px 5px;
+    text-align: center;
+    outline: none;
+    transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+/* Readonly: lighter grey, not-allowed cursor */
+.coord-box-readonly {
+    background: rgba(255, 255, 255, 0.06);
+    cursor: not-allowed;
+    pointer-events: auto;
+}
+
+/* Editable: darker background, text cursor */
+.coord-box-editable {
+    background: rgba(0, 0, 0, 0.35);
+    border-color: rgba(255, 255, 255, 0.12);
+    cursor: text;
+}
+
+.coord-box-editable:hover {
+    border-color: rgba(255, 255, 255, 0.25);
+}
+
+.coord-box-editable:focus {
+    border-color: rgba(255, 255, 255, 0.5);
+    background: rgba(0, 0, 0, 0.5);
+}
+
+/* Always reserve space for copy icon */
+.coord-copy-icon-slot {
+    flex-shrink: 0;
+    width: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.coord-copy-icon {
+    cursor: pointer;
+    opacity: 0.4;
+    transition: opacity 0.15s ease;
+}
+
+.coord-copy-icon:hover {
+    opacity: 1;
+}
+
+/* BarHandle styles */
+.bar-handle-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    padding: 2px 0;
+}
+
+.bar-handle-label {
+    color: rgba(255, 255, 255, 0.5);
+    min-width: 35px;
+    flex-shrink: 0;
+}
+
+.bar-handle-value {
+    color: #e0e0e0;
+    font-family: monospace;
+    font-size: 10px;
+    min-width: 36px;
+    text-align: right;
+    flex-shrink: 0;
+}
+
+.bar-handle-track-clean {
+    position: relative;
+    flex: 1;
+    height: 16px;
+    display: flex;
+    align-items: center;
+}
+
+.bar-handle-rail {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.25);
+    border-radius: 1px;
+}
+
+.bar-handle-circle {
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 10px;
+    height: 10px;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+    transition: left 0.05s ease;
+}
+
+.bar-handle-circle:hover {
+    transform: translate(-50%, -50%) scale(1.15);
+}
