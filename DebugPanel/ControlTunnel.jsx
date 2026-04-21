@@ -3,30 +3,15 @@
 * */
 
 import React from 'react'//for webpack consistency,
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
-import { eventChannelHub, CONTROL_CHANNELS, DEBUG_CHANNELS } from "../EventChannelHub";
+import { eventChannelHub, CONTROL_CHANNELS } from "../EventChannelHub";
 import sceneObjectRegistry from "../DigitalScene/SceneObjectRegistry";
 import * as THREE from "three";
 import gsap from "gsap";
-import { infoStoreHub } from "../InfoStoreHub";
-
-// Conditionally import r3f-perf (optional dependency)
-let Perf = null;
-try {
-    const perfModule = await import('r3f-perf');
-    Perf = perfModule.Perf;
-} catch (e) {
-    // r3f-perf not installed or not compatible with current Node version
-    console.warn('r3f-perf is not available. Performance monitoring will be disabled.');
-}
 
 export default function ControlTunnel() {
-    const { camera, scene, gl } = useThree();
-    const [showPerf, setShowPerf] = useState(false);
-    const [perfPosition, setPerfPosition] = useState('bottom-right');
-    const frameCountRef = React.useRef(0);
-    const lastTimeRef = React.useRef(performance.now());
+    const { camera, scene } = useThree();
 
     useEffect(() => {
         const handlePrintScene = () => {
@@ -144,23 +129,12 @@ export default function ControlTunnel() {
 
         eventChannelHub.subscribe(CONTROL_CHANNELS.SCENE_BACKGROUND_UPDATE, handleBackgroundUpdate);
 
-        // Performance window toggle
-        const handlePerfToggle = ({ enabled, position }) => {
-            setShowPerf(enabled);
-            if (position) {
-                setPerfPosition(position);
-            }
-        };
-
-        eventChannelHub.subscribe(DEBUG_CHANNELS.PERF_WINDOW_TOGGLE, handlePerfToggle);
-
         return () => {
             eventChannelHub.unsubscribe(CONTROL_CHANNELS.PRINT_SCENE, handlePrintScene);
             eventChannelHub.unsubscribe(CONTROL_CHANNELS.PRINT_OBJECT, handlePrintObject);
             eventChannelHub.unsubscribe(CONTROL_CHANNELS.OBJECT_UPDATE, handleObjectUpdate);
             eventChannelHub.unsubscribe(CONTROL_CHANNELS.OBJECT_ANIMATION, handleObjectAnimation);
             eventChannelHub.unsubscribe(CONTROL_CHANNELS.SCENE_BACKGROUND_UPDATE, handleBackgroundUpdate);
-            eventChannelHub.unsubscribe(DEBUG_CHANNELS.PERF_WINDOW_TOGGLE, handlePerfToggle);
         };
     }, [scene]);
 
@@ -168,9 +142,5 @@ export default function ControlTunnel() {
 
     });
 
-    return (
-        <>
-            {showPerf && Perf && <Perf position={perfPosition} />}
-        </>
-    );
+    return null;
 }

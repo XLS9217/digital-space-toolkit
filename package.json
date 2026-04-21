@@ -8,13 +8,7 @@
   },
   "peerDependencies": {
     "react": "^18.0.0 || ^19.0.0",
-    "react-dom": "^18.0.0 || ^19.0.0",
-    "r3f-perf": "^7.0.0"
-  },
-  "peerDependenciesMeta": {
-    "r3f-perf": {
-      "optional": true
-    }
+    "react-dom": "^18.0.0 || ^19.0.0"
   },
   "dependencies": {
     "@react-three/drei": "^10.7.7",

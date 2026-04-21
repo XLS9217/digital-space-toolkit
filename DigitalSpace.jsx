@@ -13,7 +13,6 @@
 
 import React from 'react'//for webpack consistency,
 import { Canvas } from "@react-three/fiber";
-import { Perf } from 'r3f-perf';
 import * as THREE from 'three';
 import DigitalSpaceControl from "./DigitalSpaceControl";
 import DebugPanel from "./DebugPanel/DebugPanel";
