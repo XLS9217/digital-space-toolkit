@@ -5,12 +5,21 @@
 import React from 'react'//for webpack consistency,
 import { useEffect, useState } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
-import { Perf } from 'r3f-perf';
 import { eventChannelHub, CONTROL_CHANNELS, DEBUG_CHANNELS } from "../EventChannelHub";
 import sceneObjectRegistry from "../DigitalScene/SceneObjectRegistry";
 import * as THREE from "three";
 import gsap from "gsap";
 import { infoStoreHub } from "../InfoStoreHub";
+
+// Conditionally import r3f-perf (optional dependency)
+let Perf = null;
+try {
+    const perfModule = await import('r3f-perf');
+    Perf = perfModule.Perf;
+} catch (e) {
+    // r3f-perf not installed or not compatible with current Node version
+    console.warn('r3f-perf is not available. Performance monitoring will be disabled.');
+}
 
 export default function ControlTunnel() {
     const { camera, scene, gl } = useThree();
@@ -161,7 +170,7 @@ export default function ControlTunnel() {
 
     return (
         <>
-            {showPerf && <Perf position={perfPosition} />}
+            {showPerf && Perf && <Perf position={perfPosition} />}
         </>
     );
 }
